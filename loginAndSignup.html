@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="assert/css/loginAndSignup.css?version=0.0.1">
+  <!--<link rel="stylesheet" href="assert/plugins/css/bootstrap.min.css">-->
+  <!--<link rel="stylesheet" href="https://at.alicdn.com/t/font_832418_iig9uckp5ta.css">-->
+  <title>测试</title>
+  <noscript>
+    <p>这个浏览器不让用javascript，高级设置开一下</p>
+  </noscript>
+
+</head>
+<body>
+
+<div class="mainViewLoginSign">
+  <ul class="loginSignView">
+    <li class="login">
+
+      <h2>走心问答-登录</h2>
+
+      <div>
+        <label for="lo_username">用户名</label>
+        <input id="lo_username" type="text" class="username">
+      </div>
+      <div>
+        <label for="lo_password">密&nbsp&nbsp&nbsp码</label>
+        <input id="lo_password" type="password" class="password">
+      </div>
+      <div>
+        <a class="loginBtn">登录</a>
+        <a class="toSignBtn">点击注册</a>
+      </div>
+
+
+    </li>
+    <li class="signup">
+      <h2>走心问答-注册</h2>
+
+      <div>
+        <label for="si_username">用户名</label>
+        <input id="si_username" type="text" class="username">
+      </div>
+      <div>
+        <label>密&nbsp&nbsp&nbsp码</label>
+        <input id="si_password" type="password" class="password">
+        <label>确&nbsp&nbsp&nbsp认</label>
+        <input type="password" class="password2">
+      </div>
+      <div>
+        <a class="signBtn">注册</a>
+        <a class="toLoginBtn">返回登录</a>
+      </div>
+
+    </li>
+
+    <li class="userDetail">
+      <h2>走心问答-个人信息</h2>
+
+      <div>
+        <label>昵&nbsp&nbsp&nbsp称</label>
+        <input type="text" class="nickname">
+      </div>
+      <div>
+        <label>出生年</label>
+        <select class="year">
+          <option value="done">1998</option>
+          <option value="want">1999</option>
+        </select>
+      </div>
+      <div>
+        <label for="">性&nbsp&nbsp&nbsp别</label>
+        <select class="sex">
+          <option value="">男</option>
+          <option value="want">女</option>
+        </select>
+      </div>
+      <div>
+        <label>省&nbsp&nbsp&nbsp份</label>
+        <select class="province">
+          <option value="done">河北</option>
+          <option value="want">河南</option>
+        </select>
+      </div>
+
+      <div>
+        <a class="detailBtn">完成</a>
+      </div>
+    </li>
+    <li class="forgetPassword">
+      <h2>走心问答-修改密码</h2>
+
+      <div>
+        <label for="fo_username">用户名</label>
+        <input id="fo_username" type="text" class="username">
+      </div>
+      <div>
+        <label>密&nbsp&nbsp&nbsp码</label>
+        <input type="password" class="password">
+      </div>
+      <div>
+        <label>确&nbsp&nbsp&nbsp认</label>
+        <input id="fo_password" type="password" class="password2">
+
+      </div>
+      <div>
+        <a class="signBtn">注册</a>
+        <a class="toLoginBtn">返回登录</a>
+      </div>
+    </li>
+  </ul>
+</div>
+
+
+<script src="assert/plugins/js/jquery-1.12.4.min.js"></script>
+<script src="assert/plugins/js/jquery.cookie.js"></script>
+<script src="assert/plugins/js/Bmob-1.6.5.min.js"></script>
+<script>
+
+
+  ;(function () {
+
+
+    // 登录
+    function loginHandle() {
+      var user = {
+        username: $('#lo_username').val(),
+        password: $('#lo_password').val()
+      }
+
+      if (user.username == '' || user.password == '') {
+        alert('用户名和密码不能为空')
+        return
+      }
+
+      doBombLogin(user)
+    }
+
+    // 注册
+    function signupHandle() {
+      var user = {
+        username: $('#si_username').val(),
+        password: $('#si_password').val()
+      }
+
+      if (user.username == '' || user.password == '') {
+        alert('用户名和密码不能为空')
+        return
+      }
+      if ($('.signup .password2').val() !== user.password) {
+        alert('两次密码不一致')
+        return
+      }
+
+      doBombSignup(user)
+    }
+
+    function detailHandle() {
+      var user = {
+        objectId: $.cookie('objectId'),
+        nickname:$('.nickname').val(),
+        birthyear:$('.year').find("option:selected").text(),
+        sex:$('.sex').find("option:selected").text(),
+        province:$('.province').find("option:selected").text()
+      }
+
+      if (user.nickname == '') {
+        alert('昵称不能为空')
+        return
+      }
+
+      console.log(user)
+      doBombDetailUpdate(user)
+    }
+
+
+    function writeCookie(objectId) {
+      $.cookie('objectId', objectId)
+    }
+
+    function moveLoginSign(num) {
+      $('.loginSignView').css('left', num)
+    }
+
+
+    //----------------------点击操作-------------
+    // 登录
+    $('.login .loginBtn').click(function () {
+      loginHandle()
+    })
+    // 移动到注册页面
+    $('.login .toSignBtn').click(function () {
+      moveLoginSign('-100%')
+    })
+    // 返回到登录页面
+    $('.signup .toLoginBtn').click(function () {
+      moveLoginSign(0)
+    })
+    //注册，成功后到详细页面
+    $('.signup .signBtn').click(function () {
+      signupHandle()
+    })
+
+    //完成详情，进入主页
+    $('.detailBtn').click(function () {
+      detailHandle()
+    })
+
+
+    // ========================数据库操作==========================
+
+    /**
+     *初始化数据库服务
+     * @param tablename String，数据库表名称
+     */
+    function initBomb(tableName) {
+      // 用自己的key初始化
+      Bmob.initialize("653162cbb778376a12882c0697ae773c", "54399511d8d388c7f0552d512ed60a0a");
+      return Bmob.Query(tableName);
+
+    }
+
+    /**
+     *注册用户
+     * @param user 对象，包含用户名和密码
+     */
+    function doBombSignup(user) {
+
+      var query = initBomb('userList')
+
+      query.set('username', user.username)
+      query.set('password', user.password)
+
+      query.save().then(function (res) {
+        if (res) {
+          alert('注册成功，转入详情页面')
+          writeCookie(res.objectId)
+          moveLoginSign('-200%')
+        }
+      }).catch(function (err) {
+        if (err.code == '401') {
+          alert('用户名已存在')
+        }
+      })
+
+    }
+
+    /**
+     *验证登录信息(条件查询)
+     * @param user 对象，包含用户名和密码
+     */
+    function doBombLogin(user) {
+
+      var query = initBomb('userList')
+
+      query.equalTo('username', '==', user.username)
+      query.equalTo('password', '==', user.password)
+
+      query.find().then(function (res) {
+        if (res.length == 0) {
+          alert('用户名或密码错误')
+        } else {
+          writeCookie(res.results[0]['objectId'])
+          console.log('OK!!!!')
+        }
+      }).catch(function (err) {
+      })
+
+    }
+
+
+    // 更新详情
+    function doBombDetailUpdate(user) {
+
+      var query = initBomb('userList')
+      query.set('id', user.objectId)
+      query.set('nickname',user.nickname)
+      query.set('birthyear', user.birthyear)
+      query.set('sex', user.sex)
+      query.set('province', user.province)
+
+      query.save().then(function (res) {
+        console.log(res)
+        console.log('OK!!!')
+
+      }).catch(function (err) {
+        console.log(err)
+      })
+
+      return true
+
+    }
+
+
+  }())
+
+
+</script>
+</body>
+</html>

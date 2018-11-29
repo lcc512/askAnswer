@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="assert/css/loginAndSignup.css?version=0.0.1">
+  <script src="assert/plugins/js/vue.min.js"></script>
+  <title>主页</title>
+</head>
+<body>
+<div id="app">{{otherNum}}</div>
+<test></test>
+
+
+<script src="assert/plugins/js/jquery-1.12.4.min.js"></script>
+<script src="assert/plugins/js/jquery.cookie.js"></script>
+<script src="assert/plugins/js/require.js"></script>
+<script>
+
+
+
+  var app = new Vue({
+    el: '#app',
+    component:test,
+    data: {
+
+      otherNum:12
+    },
+    computed: {
+
+
+    },
+    mounted() {
+
+    }
+    ,
+    methods: {
+
+    }
+  })
+</script>
+
+
+</body>
+</html>

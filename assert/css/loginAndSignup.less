@@ -1,0 +1,182 @@
+@mainColor: #0099CC;
+@mainBackColor: #fff;
+@fontBackgroundColor: #ededed;
+@mainFontSize: 18px;
+@mainFontColor: #666;
+@largeFontSize: 32px;
+@littelFontSize: 14px;
+@doneColor: #2aabd2;
+@wantColor: #5cb85c;
+@zengColor: #f0ad4e;
+@iconColor: #cb1515;
+
+//清空默认样式
+/* 清除内外边距 */
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, /* structural elements 结构元素 */
+dl, dt, dd, ul, ol, li, /* list elements 列表元素 */
+pre, /* text formatting elements 文本格式元素 */
+fieldset, lengend, button, input, textarea, /* form elements 表单元素 */
+th, td { /* table elements 表格元素 */
+  margin: 0;
+  padding: 0;
+}
+
+//border-box的正确用法
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Microsoft YaHei UI", sans-serif;
+  width: 100%;
+  height: 100%;
+  color: @mainFontColor;
+  background-color: @mainBackColor;
+  .currentUser {
+    position: fixed;
+    left: 0;
+    top: 0;
+    font-size: @littelFontSize;
+    a {
+      text-decoration: underline
+    }
+  }
+}
+
+ul {
+  list-style: none;
+  //transition: 0.5s all;
+}
+
+.clearfix::before, .clearfix:after {
+  content: ""; /*设置内容为空*/
+  height: 0; /*高度为0*/
+  line-height: 0; /*行高为0*/
+  display: block; /*将文本转为块级元素*/
+  visibility: hidden; /*将元素隐藏*/
+  clear: both /*清除浮动*/
+}
+
+.clearfix {
+  zoom: 1; /*兼容IE*/
+}
+
+a {
+  text-decoration: none;
+}
+
+/*
+以下登录注册界面
+ */
+
+//主界面外框
+.mainViewLoginSign {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+//左右滑动登录注册
+.loginSignView {
+  width: 400%;
+  height: 100%;
+  position: absolute;
+  left: 0%;
+  top: 0;
+  transition: 0.8s all;
+
+  li {
+    width: 25%;
+    height: 100%;
+    padding-top: 50px;
+    float: left;
+
+    h2 {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    & > div {
+      width: 90%;
+      margin: 0 auto;
+      //background-color: #2b669a;
+      text-align: center;
+
+      input, select,a{
+        font-size: @mainFontSize;
+        font-family: "Microsoft YaHei UI", sans-serif;
+        //border: 0;
+        outline: 0;
+
+        display: inline-block;
+        width: 80%;
+        height: 40px;
+        border-radius: 15px;
+        text-indent: 10px;
+        margin: 10px auto;
+        line-height: 40px;
+      }
+    }
+
+
+
+    //&.login {
+    //
+    //  //background-color: #2aabd2;
+    //
+    //  a {
+    //    text-align: center;
+    //    &.loginBtn {
+    //      width: 50%;
+    //      background-color: @mainColor;
+    //      color: #fff;
+    //
+    //    }
+    //    &.toSignBtn {
+    //      width: 50%;
+    //      background-color: transparent;
+    //      border-bottom: 2px solid @mainColor;
+    //      font-size: @littelFontSize;
+    //    }
+    //  }
+    //
+    //}
+    //
+    //&.signup {
+    //
+    //  //background-color: #5cb85c;
+    //
+    //  a {
+    //
+    //    text-align: center;
+    //    &.toLoginBtn {
+    //      width: 50%;
+    //      background-color: transparent;
+    //      border-bottom: 2px solid @mainColor;
+    //      font-size: @littelFontSize;
+    //    }
+    //    &.signBtn {
+    //      width: 50%;
+    //      background-color: @mainColor;
+    //      color: #fff;
+    //
+    //    }
+    //  }
+    //
+    //}
+
+  }
+
+}
